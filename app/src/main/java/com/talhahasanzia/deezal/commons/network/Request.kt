@@ -1,6 +1,4 @@
 package com.talhahasanzia.deezal.commons.network
-import retrofit2.Call
-import retrofit2.Retrofit
 
 /**
  * This is the interface that will define contract for every Request Logic in the app.
@@ -12,6 +10,5 @@ import retrofit2.Retrofit
  * Any changes in Retrofit or Network layer should not effect app layer directly
  */
 interface Request<T : BaseResponseDto> {
-    fun make(retrofit: Retrofit): Call<T>
     fun execute(responseCallback: ResponseCallback<T>)
 }

@@ -27,14 +27,6 @@ abstract class BaseRequest<T : BaseResponseDto> : Request<T> {
         retrofit = initRetrofit()
     }
 
-
-    override fun execute(responseCallback: ResponseCallback<T>) {
-        // make call
-        make(retrofit)
-            // get Call<T> instance from the implementing Request class
-            .enqueue(DefaultResponseCallback(responseCallback))
-    }
-
     /**
      * Create HTTP Client using OkHttp
      */
