@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--standard material units, add further tags as per multiple of 8dp units-->
+    <dimen name="unit_1x">8dp</dimen>
+    <dimen name="unit_2x">16dp</dimen>
+    <dimen name="unit_3x">24dp</dimen>
+    <dimen name="unit_4x">32dp</dimen>
+    <dimen name="unit_5x">40dp</dimen>
+    <dimen name="unit_8x">64dp</dimen>
+
+    <!--text sizes-->
+    <dimen name="text_size_14sp">14sp</dimen>
+    <dimen name="text_size_16sp">16sp</dimen>
+    <dimen name="text_size_18sp">18sp</dimen>
+    <dimen name="text_size_20sp">20sp</dimen>
+
+    <!--Absolute dp units-->
+    <dimen name="unit_0dp">0dp</dimen>
+    <dimen name="unit_4dp">4dp</dimen>
+
+    <!--View specific dimens should go here-->
+
+</resources>
