@@ -25,11 +25,13 @@ class SearchInteractorImpl @Inject constructor(private val searchArtistRequest: 
 
     override fun onSuccess(response: SearchArtistResponse) {
         out.onArtistsFound(response.data)
+        searchArtistRequest.dispose()
     }
 
     override fun onFailure(message: String?, code: Int) {
         message?.let {
             out.onArtistFailure(it)
         }
+        searchArtistRequest.dispose()
     }
 }
