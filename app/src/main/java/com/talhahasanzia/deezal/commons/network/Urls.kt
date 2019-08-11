@@ -4,6 +4,6 @@ package com.talhahasanzia.deezal.commons.network
  * Any URLs that this app uses should be declared here
  */
 object Urls {
-    val BASE_URL = ""
-    val BASE_IMAGE_URL = ""
+    const val BASE_URL = "https://api.deezer.com"
+    const val SEARCH_ARTIST = "/search/artist"
 }

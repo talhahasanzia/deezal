@@ -2,9 +2,11 @@ package com.talhahasanzia.deezal.commons.network
 
 
 import com.talhahasanzia.deezal.commons.utils.Constants
+import io.reactivex.disposables.CompositeDisposable
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -20,11 +22,13 @@ import java.util.concurrent.TimeUnit
  */
 abstract class BaseRequest<T : BaseResponseDto> : Request<T> {
     // declare retrofit
-    private var retrofit: Retrofit
+    protected var retrofit: Retrofit
+    protected var disposable: CompositeDisposable
 
     // initialize retrofit
     init {
         retrofit = initRetrofit()
+        disposable = CompositeDisposable()
     }
 
     /**
@@ -44,6 +48,7 @@ abstract class BaseRequest<T : BaseResponseDto> : Request<T> {
         return Retrofit.Builder()
             .baseUrl(Urls.BASE_URL)
             .client(createHttpClient())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -62,5 +67,9 @@ abstract class BaseRequest<T : BaseResponseDto> : Request<T> {
             return chain!!.proceed(request)
         }
 
+    }
+
+    override fun dispose() {
+        disposable.clear()
     }
 }

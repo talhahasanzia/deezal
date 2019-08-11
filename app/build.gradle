@@ -36,3 +36,7 @@ kapt {
 
 // keep dependencies file separate to avoid clutter here
 apply from: 'dependencies.gradle'
+
+dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:+'
+}

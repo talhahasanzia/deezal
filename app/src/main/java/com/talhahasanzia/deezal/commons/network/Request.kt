@@ -11,4 +11,5 @@ package com.talhahasanzia.deezal.commons.network
  */
 interface Request<T : BaseResponseDto> {
     fun execute(responseCallback: ResponseCallback<T>)
+    fun dispose()
 }
