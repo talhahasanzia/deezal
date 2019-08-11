@@ -14,10 +14,9 @@ class SearchArtistRequest : BaseRequest<SearchArtistResponse, String>() {
 
     override fun execute(data: HashMap<String, String>, responseCallback: ResponseCallback<SearchArtistResponse>) {
         data[QUERY]?.let {
-            val query = it as String
             disposable.add(
                 retrofit.create(SearchAPI::class.java)
-                    .getArtistBySearch(query)
+                    .getArtistBySearch(it)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe(responseCallback::onSuccess) { e -> responseCallback.onFailure(e.message, -1) }
