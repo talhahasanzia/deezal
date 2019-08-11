@@ -1,19 +1,36 @@
 package com.talhahasanzia.deezal.app.search.dependencies
 
+import com.talhahasanzia.deezal.app.search.api.SearchArtistRequest
+import com.talhahasanzia.deezal.app.search.api.SearchArtistResponse
+import com.talhahasanzia.deezal.app.search.contracts.SearchInteractor
 import com.talhahasanzia.deezal.app.search.contracts.SearchPresenter
-import com.talhahasanzia.deezal.app.search.contracts.SearchView
+import com.talhahasanzia.deezal.app.search.interactor.SearchInteractorImpl
 import com.talhahasanzia.deezal.app.search.presenter.SearchPresenterImpl
+import com.talhahasanzia.deezal.commons.network.Request
 import dagger.Module
 import dagger.Provides
 
 @Module
 class SearchModule {
 
-    @Provides
     @SearchScope
-    fun providePresenter(view: SearchView): SearchPresenter {
-        val presenter = SearchPresenterImpl()
-        presenter.initView(view)
-        return presenter
+    @Provides
+    fun providePresenter(searchInteractor: SearchInteractor): SearchPresenter {
+        return SearchPresenterImpl(searchInteractor)
     }
+
+    @SearchScope
+    @Provides
+    fun provideInteractor(request: Request<SearchArtistResponse, String>): SearchInteractor {
+        return SearchInteractorImpl(request)
+    }
+
+    @SearchScope
+    @Provides
+    fun provideSearchRequest(): Request<SearchArtistResponse, String> {
+        return SearchArtistRequest()
+    }
+
+
 }
+

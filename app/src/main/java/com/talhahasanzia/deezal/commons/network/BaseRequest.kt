@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
  * This layer will act as mediator between pure network logic and application layer.
  * Any changes in Retrofit or Network layer should not effect app layer directly.
  */
-abstract class BaseRequest<T : BaseResponseDto> : Request<T> {
+abstract class BaseRequest<T : BaseResponseDto, R : Any> : Request<T, R> {
     // declare retrofit
     protected var retrofit: Retrofit
     protected var disposable: CompositeDisposable

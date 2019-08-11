@@ -1,10 +1,15 @@
 package com.talhahasanzia.deezal.app.search.interactor
 
+import com.talhahasanzia.deezal.app.search.api.SearchArtistRequest
+import com.talhahasanzia.deezal.app.search.api.SearchArtistResponse
 import com.talhahasanzia.deezal.app.search.contracts.SearchInteractor
 import com.talhahasanzia.deezal.app.search.contracts.SearchInteractorOut
-import com.talhahasanzia.deezal.commons.contracts.BaseInteractor
+import com.talhahasanzia.deezal.commons.network.Request
+import com.talhahasanzia.deezal.commons.network.ResponseCallback
+import javax.inject.Inject
 
-class SearchInteractorImpl : SearchInteractor {
+class SearchInteractorImpl @Inject constructor(private val searchArtistRequest: Request<SearchArtistResponse, String>) :
+    SearchInteractor, ResponseCallback<SearchArtistResponse> {
 
     private lateinit var out: SearchInteractorOut
 
@@ -12,4 +17,19 @@ class SearchInteractorImpl : SearchInteractor {
         this.out = out
     }
 
+    override fun getArtists(query: String) {
+        val data: HashMap<String, String> = HashMap()
+        data[SearchArtistRequest.QUERY] = query
+        searchArtistRequest.execute(data, this)
+    }
+
+    override fun onSuccess(response: SearchArtistResponse) {
+        out.onArtistsFound(response.data)
+    }
+
+    override fun onFailure(message: String?, code: Int) {
+        message?.let {
+            out.onArtistFailure(it)
+        }
+    }
 }

@@ -8,8 +8,19 @@ package com.talhahasanzia.deezal.commons.network
  * To define request specifications like end points or payloads extend BaseRequest and implement this interface to specify Response type T.
  * This layer will act as mediator between pure network logic and application layer
  * Any changes in Retrofit or Network layer should not effect app layer directly
+ * T: type of response object
+ * D: type of request object
  */
-interface Request<T : BaseResponseDto> {
-    fun execute(responseCallback: ResponseCallback<T>)
+interface Request<T : BaseResponseDto, R : Any> {
+    /**
+     * Execute request with any data passed that is required in request. And a callback in which result of the request will be delivered.
+     * We can pass data in key value pair, but we need to specify this data type D when implementing execute().
+     * Creation of request body or other json object must be in specific request implementation
+     */
+    fun execute(data: HashMap<String, R>, responseCallback: ResponseCallback<T>)
+
+    /**
+     * Call dispose after receiving result either success or failure since this object provided an observable
+     */
     fun dispose()
 }

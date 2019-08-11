@@ -16,18 +16,23 @@ import com.talhahasanzia.deezal.commons.contracts.BaseView
  * without implementing onCreate() again.
  */
 abstract class BaseActivity : AppCompatActivity(), BaseView {
-    final override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayout())
         inject()
+        onCreate()
     }
 
     override fun showError(message: String) {
         val dialog = AlertDialog.Builder(this)
             .setMessage(message)
-            .setPositiveButton(R.string.ok) { dialogInterface, i -> dialogInterface.dismiss() }
+            .setPositiveButton(R.string.ok) { dialogInterface, _ -> dialogInterface.dismiss() }
             .create()
 
         dialog.show()
+    }
+
+    // if child activity wants to work with onCreate it can use simpler signature
+    protected open fun onCreate(){
     }
 }

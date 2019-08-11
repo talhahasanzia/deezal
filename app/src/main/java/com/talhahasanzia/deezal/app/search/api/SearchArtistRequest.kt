@@ -5,14 +5,24 @@ import com.talhahasanzia.deezal.commons.network.ResponseCallback
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class SearchArtistRequest(private val searchQuery: String) : BaseRequest<SearchArtistResponse>() {
+class SearchArtistRequest : BaseRequest<SearchArtistResponse, String>() {
 
-    override fun execute(responseCallback: ResponseCallback<SearchArtistResponse>) {
-        disposable.add(retrofit.create(SearchAPI::class.java)
-            .getArtistBySearch(searchQuery)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribe(responseCallback::onSuccess) { e -> responseCallback.onFailure(e.message, -1) }
-        )
+    // Keys for data specific to this request
+    companion object Keys {
+        const val QUERY = "query"
+    }
+
+    override fun execute(data: HashMap<String, String>, responseCallback: ResponseCallback<SearchArtistResponse>) {
+        data[QUERY]?.let {
+            val query = it as String
+            disposable.add(
+                retrofit.create(SearchAPI::class.java)
+                    .getArtistBySearch(query)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(responseCallback::onSuccess) { e -> responseCallback.onFailure(e.message, -1) }
+            )
+        }
+
     }
 }

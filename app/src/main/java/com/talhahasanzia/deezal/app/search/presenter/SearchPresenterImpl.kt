@@ -1,18 +1,41 @@
 package com.talhahasanzia.deezal.app.search.presenter
 
+import com.talhahasanzia.deezal.app.search.api.Data
 import com.talhahasanzia.deezal.app.search.contracts.SearchInteractor
 import com.talhahasanzia.deezal.app.search.contracts.SearchInteractorOut
 import com.talhahasanzia.deezal.app.search.contracts.SearchPresenter
 import com.talhahasanzia.deezal.app.search.contracts.SearchView
-import com.talhahasanzia.deezal.app.search.interactor.SearchInteractorImpl
+import com.talhahasanzia.deezal.commons.logging.DeezalLogger
+import javax.inject.Inject
 
-class SearchPresenterImpl : SearchPresenter, SearchInteractorOut {
+class SearchPresenterImpl @Inject constructor(private val interactor: SearchInteractor): SearchPresenter, SearchInteractorOut {
+
     private lateinit var view: SearchView
-    private lateinit var searchInteractor: SearchInteractor
 
     override fun initView(view: SearchView) {
         this.view = view
-        searchInteractor = SearchInteractorImpl()
-        searchInteractor.initOut(this)
+        interactor.initOut(this)
+    }
+
+    override fun onTextChanged(string: String) {
+        if (string.isEmpty()) {
+            // user cleared the text
+            view.clearErrors()
+        } else {
+            interactor.getArtists(string)
+        }
+    }
+
+    override fun onArtistsFound(data: List<Data>) {
+        if (data.isNotEmpty()) {
+            view.setArtistsData(data)
+        } else {
+            view.showNoArtistsFound()
+        }
+    }
+
+    override fun onArtistFailure(message: String) {
+        DeezalLogger.log(message)
+        view.showNoArtistsFound()
     }
 }

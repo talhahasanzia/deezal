@@ -5,6 +5,65 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorBlack"
         tools:context=".app.search.view.SearchActivity">
+
+    <android.support.v7.widget.SearchView
+            android:id="@+id/artistSearchView"
+            android:layout_width="@dimen/unit_0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            app:queryHint="@string/search_hint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="@dimen/unit_2x"/>
+
+    <TextView
+            android:id="@+id/artistsTitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/artists"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_16sp"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="@dimen/unit_2x"
+            app:layout_constraintTop_toBottomOf="@id/artistSearchView"
+            app:layout_constraintStart_toStartOf="@id/artistSearchView"/>
+
+    <TextView
+            android:id="@+id/searchErrorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_16sp"
+            android:textColor="@color/colorLightGrey"
+            android:layout_marginTop="@dimen/unit_2x"
+            android:text="@string/no_artists_found"
+            android:visibility="invisible"
+            android:textStyle="italic"
+            app:layout_constraintTop_toBottomOf="@id/artistSearchView"
+            app:layout_constraintEnd_toEndOf="@id/artistSearchView"/>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/artistResultsRecyclerView"
+            android:layout_width="@dimen/unit_0dp"
+            android:layout_height="@dimen/unit_0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/unit_2x"
+            android:layout_marginBottom="@dimen/unit_1x"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/artistsTitleText"/>
+
+    <ProgressBar
+            android:id="@+id/loader"
+            android:visibility="invisible"
+            android:layout_width="@dimen/unit_4x"
+            android:layout_height="@dimen/unit_4x"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/artistsTitleText"
+    />
+
 
 </android.support.constraint.ConstraintLayout>
