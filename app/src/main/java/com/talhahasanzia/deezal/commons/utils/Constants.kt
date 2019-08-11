@@ -5,6 +5,5 @@ package com.talhahasanzia.deezal.commons.utils
  * App-wide constants goes here
  */
 object Constants {
-    val REQUEST_TIMEOUT: Long = 10
-    val API_KEY = ""
+    const val REQUEST_TIMEOUT: Long = 10
 }
