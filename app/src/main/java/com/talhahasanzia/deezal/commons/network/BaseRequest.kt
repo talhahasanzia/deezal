@@ -2,9 +2,10 @@ package com.talhahasanzia.deezal.commons.network
 
 
 import com.talhahasanzia.deezal.commons.utils.Constants
-import okhttp3.Interceptor
+import io.reactivex.disposables.CompositeDisposable
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -18,21 +19,15 @@ import java.util.concurrent.TimeUnit
  * This layer will act as mediator between pure network logic and application layer.
  * Any changes in Retrofit or Network layer should not effect app layer directly.
  */
-abstract class BaseRequest<T : BaseResponseDto> : Request<T> {
-    // declare retrofit
-    private var retrofit: Retrofit
+abstract class BaseRequest<T : BaseResponseDto, R : Any> : Request<T, R> {
 
-    // initialize retrofit
+    protected var retrofit: Retrofit
+    protected var disposable: CompositeDisposable
+
+
     init {
         retrofit = initRetrofit()
-    }
-
-
-    override fun execute(responseCallback: ResponseCallback<T>) {
-        // make call
-        make(retrofit)
-            // get Call<T> instance from the implementing Request class
-            .enqueue(DefaultResponseCallback(responseCallback))
+        disposable = CompositeDisposable()
     }
 
     /**
@@ -41,7 +36,6 @@ abstract class BaseRequest<T : BaseResponseDto> : Request<T> {
     private fun createHttpClient(): OkHttpClient {
         val builder = OkHttpClient().newBuilder()
         builder.connectTimeout(Constants.REQUEST_TIMEOUT, TimeUnit.SECONDS)
-        builder.addInterceptor(ApiKeyInterceptor())
         return builder.build()
     }
 
@@ -52,23 +46,12 @@ abstract class BaseRequest<T : BaseResponseDto> : Request<T> {
         return Retrofit.Builder()
             .baseUrl(Urls.BASE_URL)
             .client(createHttpClient())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
-    /**
-     * We need to pass API Key to every request
-     * So we make an interceptor and attach our API Key to every request URL
-     */
-    // Since data is guaranteed here
-    @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-    class ApiKeyInterceptor : Interceptor {
-        override fun intercept(chain: Interceptor.Chain?): okhttp3.Response {
-            var request = chain?.request()
-            val url = request?.url()?.newBuilder()?.addQueryParameter("api_key", Constants.API_KEY)?.build()
-            request = request?.newBuilder()?.url(url)?.build()
-            return chain!!.proceed(request)
-        }
-
+    override fun dispose() {
+        disposable.clear()
     }
 }

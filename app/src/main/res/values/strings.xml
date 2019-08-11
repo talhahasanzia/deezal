@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Deezal</string>
+    <string name="ok">OKAY</string>
+    <string name="artists">Artists</string>
+    <string name="artist_logo">Artist Logo</string>
+    <string name="no_artists_found">No artists found</string>
+    <string name="search_hint">Enter any artist name</string>
 </resources>

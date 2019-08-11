@@ -6,6 +6,7 @@
     <dimen name="unit_3x">24dp</dimen>
     <dimen name="unit_4x">32dp</dimen>
     <dimen name="unit_5x">40dp</dimen>
+    <dimen name="unit_6x">48dp</dimen>
     <dimen name="unit_8x">64dp</dimen>
 
     <!--text sizes-->

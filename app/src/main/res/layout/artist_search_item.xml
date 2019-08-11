@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent" android:layout_height="@dimen/unit_8x">
+
+    <ImageView
+            android:id="@+id/artistLogo"
+            android:layout_width="@dimen/unit_6x"
+            android:layout_height="@dimen/unit_6x"
+            android:layout_marginStart="@dimen/unit_2x"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/artist_logo"/>
+
+    <TextView
+            android:id="@+id/artistNameText"
+            android:layout_width="@dimen/unit_0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_16sp"
+            android:textColor="@color/colorWhite"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:marqueeRepeatLimit ="marquee_forever"
+            android:scrollHorizontally="true"
+            android:layout_marginStart="@dimen/unit_2x"
+            android:layout_marginEnd="@dimen/unit_2x"
+            app:layout_constraintStart_toEndOf="@id/artistLogo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/artistLogo"
+            app:layout_constraintBottom_toBottomOf="@id/artistLogo"/>
+
+
+</android.support.constraint.ConstraintLayout>
