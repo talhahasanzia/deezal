@@ -12,8 +12,8 @@ class AlbumsRequest : BaseRequest<AlbumsResponse, String>() {
         const val ID = "id"
     }
 
-    override fun execute(data: HashMap<String, String>, responseCallback: ResponseCallback<AlbumsResponse>) {
-        data[ID]?.let {
+    override fun execute(requestData: HashMap<String, String>, responseCallback: ResponseCallback<AlbumsResponse>) {
+        requestData[ID]?.let {
             disposable.add(
                 retrofit.create(AlbumsAPI::class.java)
                     .getArtistAlbums(it)

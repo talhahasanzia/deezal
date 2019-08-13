@@ -9,7 +9,7 @@ class TrackListRequest: BaseRequest<TrackListResponse, String>() {
         const val TRACK_ID = "TRACK_ID"
     }
 
-    override fun execute(data: HashMap<String, String>, responseCallback: ResponseCallback<TrackListResponse>) {
+    override fun execute(requestData: HashMap<String, String>, responseCallback: ResponseCallback<TrackListResponse>) {
 
     }
 }
