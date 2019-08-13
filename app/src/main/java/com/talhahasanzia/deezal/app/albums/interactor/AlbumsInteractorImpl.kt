@@ -31,8 +31,8 @@ class AlbumsInteractorImpl @Inject constructor(private val request: Request<Albu
 
     override fun onFailure(message: String?, code: Int) {
         message?.let {
-            DeezalLogger.log(message)
-            out.onAlbumsFailure(message)
+            DeezalLogger.log(it)
+            out.onAlbumsFailure(it)
         }
         request.dispose()
     }
