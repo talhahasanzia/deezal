@@ -6,6 +6,7 @@ import com.talhahasanzia.deezal.app.albums.contracts.AlbumsInteractor
 import com.talhahasanzia.deezal.app.albums.contracts.AlbumsPresenter
 import com.talhahasanzia.deezal.app.albums.interactor.AlbumsInteractorImpl
 import com.talhahasanzia.deezal.app.albums.presenter.AlbumsPresenterImpl
+import com.talhahasanzia.deezal.app.tracks.router.TracksRouter
 import com.talhahasanzia.deezal.commons.network.Request
 import dagger.Module
 import dagger.Provides
@@ -29,6 +30,12 @@ class AlbumsModule {
     @AlbumsScope
     fun provideAlbumsRequest(): Request<AlbumsResponse, String> {
         return AlbumsRequest()
+    }
+
+    @Provides
+    @AlbumsScope
+    fun provideTracksRouter(): TracksRouter {
+        return TracksRouter()
     }
 }
 

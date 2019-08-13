@@ -12,6 +12,7 @@ import com.talhahasanzia.deezal.app.albums.contracts.AlbumsView
 import com.talhahasanzia.deezal.app.albums.dependencies.DaggerAlbumsComponent
 import com.talhahasanzia.deezal.app.albums.router.AlbumsRouter
 import com.talhahasanzia.deezal.app.search.api.Artist
+import com.talhahasanzia.deezal.app.tracks.router.TracksRouter
 import com.talhahasanzia.deezal.commons.extensions.hide
 import com.talhahasanzia.deezal.commons.extensions.show
 import com.talhahasanzia.deezal.commons.ui.BaseActivity
@@ -23,6 +24,9 @@ class AlbumsActivity : BaseActivity(), AlbumsView {
 
     @Inject
     lateinit var presenter: AlbumsPresenter
+
+    @Inject
+    lateinit var tracksRouter: TracksRouter
 
     private lateinit var adapter: AlbumsAdapter
 
@@ -96,6 +100,6 @@ class AlbumsActivity : BaseActivity(), AlbumsView {
     }
 
     override fun onAlbumClicked(album: Album) {
-
+        tracksRouter.route(this, album)
     }
 }
