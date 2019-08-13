@@ -7,8 +7,9 @@ import com.talhahasanzia.deezal.app.albums.contracts.AlbumsPresenter
 import com.talhahasanzia.deezal.app.albums.contracts.AlbumsView
 import javax.inject.Inject
 
-class AlbumsPresenterImpl @Inject constructor(private val interactor: AlbumsInteractor) : AlbumsPresenter,
-    AlbumsInteractorOut {
+class AlbumsPresenterImpl @Inject constructor(
+    private val interactor: AlbumsInteractor
+) : AlbumsPresenter, AlbumsInteractorOut {
 
     private lateinit var view: AlbumsView
 

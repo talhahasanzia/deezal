@@ -9,8 +9,9 @@ import com.talhahasanzia.deezal.commons.network.Request
 import com.talhahasanzia.deezal.commons.network.ResponseCallback
 import javax.inject.Inject
 
-class AlbumsInteractorImpl @Inject constructor(private val request: Request<AlbumsResponse, String>) :
-    AlbumsInteractor, ResponseCallback<AlbumsResponse> {
+class AlbumsInteractorImpl @Inject constructor(
+    private val request: Request<AlbumsResponse, String>
+) : AlbumsInteractor, ResponseCallback<AlbumsResponse> {
 
     private lateinit var out: AlbumsInteractorOut
 

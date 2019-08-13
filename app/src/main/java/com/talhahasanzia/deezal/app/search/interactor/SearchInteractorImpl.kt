@@ -9,8 +9,9 @@ import com.talhahasanzia.deezal.commons.network.Request
 import com.talhahasanzia.deezal.commons.network.ResponseCallback
 import javax.inject.Inject
 
-class SearchInteractorImpl @Inject constructor(private val searchArtistRequest: Request<SearchArtistResponse, String>) :
-    SearchInteractor, ResponseCallback<SearchArtistResponse> {
+class SearchInteractorImpl @Inject constructor(
+    private val searchArtistRequest: Request<SearchArtistResponse, String>
+) : SearchInteractor, ResponseCallback<SearchArtistResponse> {
 
     private lateinit var out: SearchInteractorOut
 

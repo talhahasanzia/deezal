@@ -7,7 +7,9 @@ import com.talhahasanzia.deezal.app.search.contracts.SearchPresenter
 import com.talhahasanzia.deezal.app.search.contracts.SearchView
 import javax.inject.Inject
 
-class SearchPresenterImpl @Inject constructor(private val interactor: SearchInteractor): SearchPresenter, SearchInteractorOut {
+class SearchPresenterImpl @Inject constructor(
+    private val interactor: SearchInteractor
+) : SearchPresenter, SearchInteractorOut {
 
     private lateinit var view: SearchView
 
