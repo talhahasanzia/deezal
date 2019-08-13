@@ -7,4 +7,5 @@
     <color name="colorBlack">#000000</color>
     <color name="colorLightGrey">#D5D5D5</color>
     <color name="colorTransparent">#00000000</color>
+    <color name="colorGradientLight">#929292</color>
 </resources>

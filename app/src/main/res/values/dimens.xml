@@ -24,5 +24,7 @@
     <!--View specific dimens should go here-->
     <dimen name="unit_album_height">220dp</dimen>
     <dimen name="unit_album_width">160dp</dimen>
+    <dimen name="tracks_top_height">420dp</dimen>
+    <dimen name="track_album_height">280dp</dimen>
 
 </resources>

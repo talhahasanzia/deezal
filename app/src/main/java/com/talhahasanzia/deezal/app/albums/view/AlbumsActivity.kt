@@ -100,6 +100,9 @@ class AlbumsActivity : BaseActivity(), AlbumsView {
     }
 
     override fun onAlbumClicked(album: Album) {
-        tracksRouter.route(this, album)
+        getArtistFromIntent()?.let {
+            val trackData = TracksRouter.TracksData(it.name, album)
+            tracksRouter.route(this, trackData)
+        }
     }
 }
