@@ -1,11 +1,10 @@
 package com.talhahasanzia.deezal.app.search.presenter
 
-import com.talhahasanzia.deezal.app.search.api.Data
+import com.talhahasanzia.deezal.app.search.api.Artist
 import com.talhahasanzia.deezal.app.search.contracts.SearchInteractor
 import com.talhahasanzia.deezal.app.search.contracts.SearchInteractorOut
 import com.talhahasanzia.deezal.app.search.contracts.SearchPresenter
 import com.talhahasanzia.deezal.app.search.contracts.SearchView
-import com.talhahasanzia.deezal.commons.logging.DeezalLogger
 import javax.inject.Inject
 
 class SearchPresenterImpl @Inject constructor(private val interactor: SearchInteractor): SearchPresenter, SearchInteractorOut {
@@ -26,7 +25,7 @@ class SearchPresenterImpl @Inject constructor(private val interactor: SearchInte
         }
     }
 
-    override fun onArtistsFound(data: List<Data>) {
+    override fun onArtistsFound(data: List<Artist>) {
         if (data.isNotEmpty()) {
             view.setArtistsData(data)
         } else {
@@ -35,7 +34,6 @@ class SearchPresenterImpl @Inject constructor(private val interactor: SearchInte
     }
 
     override fun onArtistFailure(message: String) {
-        DeezalLogger.log(message)
-        view.showNoArtistsFound()
+        view.showError(message)
     }
 }

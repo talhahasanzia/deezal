@@ -4,6 +4,7 @@ import com.talhahasanzia.deezal.app.search.api.SearchArtistRequest
 import com.talhahasanzia.deezal.app.search.api.SearchArtistResponse
 import com.talhahasanzia.deezal.app.search.contracts.SearchInteractor
 import com.talhahasanzia.deezal.app.search.contracts.SearchInteractorOut
+import com.talhahasanzia.deezal.commons.logging.DeezalLogger
 import com.talhahasanzia.deezal.commons.network.Request
 import com.talhahasanzia.deezal.commons.network.ResponseCallback
 import javax.inject.Inject
@@ -30,6 +31,7 @@ class SearchInteractorImpl @Inject constructor(private val searchArtistRequest: 
 
     override fun onFailure(message: String?, code: Int) {
         message?.let {
+            DeezalLogger.log(message)
             out.onArtistFailure(it)
         }
         searchArtistRequest.dispose()

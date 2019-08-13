@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBlack">
+
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/albumsToolbar"
+            android:layout_width="@dimen/unit_0dp"
+            android:layout_height="?actionBarSize"
+            app:contentInsetStart="@dimen/unit_0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <ImageView
+                    android:id="@+id/backImage"
+                    android:layout_width="?actionBarSize"
+                    android:layout_height="@dimen/unit_0dp"
+                    android:src="@drawable/ic_arrow_back"
+                    android:padding="@dimen/unit_14dp"
+                    android:contentDescription="@string/back_key_albums"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            <TextView
+                    android:id="@+id/titleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/unit_0dp"
+                    android:text="@string/albums"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_size_20sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginStart="@dimen/unit_1x"
+                    app:layout_constraintStart_toEndOf="@id/backImage"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/albumsRecyclerView"
+            android:layout_width="@dimen/unit_0dp"
+            android:layout_height="@dimen/unit_0dp"
+            android:layout_marginStart="@dimen/unit_2x"
+            android:layout_marginEnd="@dimen/unit_2x"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/albumsToolbar"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+            android:id="@+id/noAlbumsText"
+            android:layout_width="@dimen/unit_0dp"
+            android:layout_height="@dimen/unit_0dp"
+            android:text="@string/no_albums_found"
+            android:textColor="@color/colorLightGrey"
+            android:visibility="invisible"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ProgressBar
+            android:id="@+id/albumsLoader"
+            android:visibility="visible"
+            android:layout_width="@dimen/unit_4x"
+            android:layout_height="@dimen/unit_4x"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
