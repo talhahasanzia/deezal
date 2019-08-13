@@ -1,9 +1,7 @@
 package com.talhahasanzia.deezal.app.albums.view
 
-import android.os.Bundle
 import android.support.annotation.LayoutRes
 import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import com.talhahasanzia.deezal.R
@@ -79,8 +77,7 @@ class AlbumsActivity : BaseActivity(), AlbumsView {
     private fun getArtistFromIntent(): Artist? {
         var artist: Artist? = null
         if (intent.hasExtra(AlbumsRouter.ARTIST)) {
-            val bundle = intent.extras!![AlbumsRouter.ARTIST] as Bundle
-            artist = bundle[AlbumsRouter.ARTIST] as Artist
+            artist = intent.getSerializableExtra(AlbumsRouter.ARTIST) as Artist
         }
         return artist
     }

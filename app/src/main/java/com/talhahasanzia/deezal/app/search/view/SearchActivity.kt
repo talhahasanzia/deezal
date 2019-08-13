@@ -1,6 +1,5 @@
 package com.talhahasanzia.deezal.app.search.view
 
-import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.LinearLayoutManager
 import com.jakewharton.rxbinding.support.v7.widget.RxSearchView
@@ -40,6 +39,11 @@ class SearchActivity : BaseActivity(), SearchView {
         initArtistsRecyclerView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        resetSearch()
+    }
+
     private fun initSearchView() {
         // since we don't want to request API on every change, we wait for the user to stop typing for 1 second then call API
         RxSearchView.queryTextChanges(artistSearchView)
@@ -71,8 +75,8 @@ class SearchActivity : BaseActivity(), SearchView {
 
     override fun clearErrors() {
         loader.hide()
-        adapter.clearData()
         searchErrorText.hide()
+        adapter.clearData()
     }
 
     override fun showNoArtistsFound() {
@@ -88,11 +92,13 @@ class SearchActivity : BaseActivity(), SearchView {
     }
 
     override fun onArtistClicked(artist: Artist) {
-        val data = Bundle()
-        data.putSerializable(AlbumsRouter.ARTIST, artist)
-        albumsRouter.route(this, data)
+        albumsRouter.route(this, artist)
+    }
 
+    private fun resetSearch() {
         artistSearchView.setQuery("", true)
         artistResultsRecyclerView.hide()
+        searchErrorText.hide()
+        loader.hide()
     }
 }
