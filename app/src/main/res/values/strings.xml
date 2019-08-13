@@ -5,4 +5,8 @@
     <string name="artist_logo">Artist Logo</string>
     <string name="no_artists_found">No artists found</string>
     <string name="search_hint">Enter any artist name</string>
+    <string name="albums">Albums</string>
+    <string name="no_albums_found">No Albums Found</string>
+    <string name="album_logo">Album Logo</string>
+    <string name="back_key_albums">Back key on Albums</string>
 </resources>

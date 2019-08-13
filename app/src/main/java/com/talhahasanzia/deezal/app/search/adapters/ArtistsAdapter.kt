@@ -8,12 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
 import com.talhahasanzia.deezal.R
-import com.talhahasanzia.deezal.app.search.api.Data
+import com.talhahasanzia.deezal.app.search.api.Artist
 import com.talhahasanzia.deezal.commons.utils.CircleTransformation
 
-class ArtistsAdapter(private var data: List<Data>) : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>() {
+class ArtistsAdapter(private var data: List<Artist>, private val artistClickListener: ArtistClickListener)
+    : RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder>() {
 
-    fun updateData(data: List<Data>) {
+    fun updateData(data: List<Artist>) {
         this.data = data
         notifyDataSetChanged()
     }
@@ -38,7 +39,7 @@ class ArtistsAdapter(private var data: List<Data>) : RecyclerView.Adapter<Artist
 
 
     inner class ArtistViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(data: Data) {
+        fun bind(data: Artist) {
             // set name
             itemView.findViewById<TextView>(R.id.artistNameText).text = data.name
             // set artist logo
@@ -48,6 +49,12 @@ class ArtistsAdapter(private var data: List<Data>) : RecyclerView.Adapter<Artist
                 .load(data.picture_medium)
                 .transform(CircleTransformation())
                 .into(artistLogo)
+
+            itemView.setOnClickListener { artistClickListener.onArtistClicked(data) }
         }
+    }
+
+    interface ArtistClickListener {
+        fun onArtistClicked(artist: Artist)
     }
 }

@@ -18,7 +18,11 @@
     <!--Absolute dp units-->
     <dimen name="unit_0dp">0dp</dimen>
     <dimen name="unit_4dp">4dp</dimen>
+    <dimen name="unit_14dp">14dp</dimen>
+
 
     <!--View specific dimens should go here-->
+    <dimen name="unit_album_height">220dp</dimen>
+    <dimen name="unit_album_width">160dp</dimen>
 
 </resources>

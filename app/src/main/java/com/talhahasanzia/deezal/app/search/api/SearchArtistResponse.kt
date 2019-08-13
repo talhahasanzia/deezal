@@ -1,14 +1,15 @@
 package com.talhahasanzia.deezal.app.search.api
 
 import com.talhahasanzia.deezal.commons.network.BaseResponseDto
+import java.io.Serializable
 
 data class SearchArtistResponse(
-    var data: List<Data>,
+    var data: List<Artist>,
     var total: Int,
     var next: String
-) : BaseResponseDto()
+) : BaseResponseDto(), Serializable
 
-data class Data(
+data class Artist(
 
     var id: String,
 
@@ -36,4 +37,4 @@ data class Data(
 
     var type: String
 
-)
+) : Serializable

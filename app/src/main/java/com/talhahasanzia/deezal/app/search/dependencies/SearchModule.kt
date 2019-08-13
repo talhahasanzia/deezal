@@ -1,5 +1,6 @@
 package com.talhahasanzia.deezal.app.search.dependencies
 
+import com.talhahasanzia.deezal.app.albums.router.AlbumsRouter
 import com.talhahasanzia.deezal.app.search.api.SearchArtistRequest
 import com.talhahasanzia.deezal.app.search.api.SearchArtistResponse
 import com.talhahasanzia.deezal.app.search.contracts.SearchInteractor
@@ -17,6 +18,12 @@ class SearchModule {
     @Provides
     fun providePresenter(searchInteractor: SearchInteractor): SearchPresenter {
         return SearchPresenterImpl(searchInteractor)
+    }
+
+    @SearchScope
+    @Provides
+    fun provideAlbumsRouter(): AlbumsRouter {
+        return AlbumsRouter()
     }
 
     @SearchScope

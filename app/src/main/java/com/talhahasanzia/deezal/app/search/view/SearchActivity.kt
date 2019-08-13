@@ -2,12 +2,11 @@ package com.talhahasanzia.deezal.app.search.view
 
 import android.support.annotation.LayoutRes
 import android.support.v7.widget.LinearLayoutManager
-import android.view.Gravity
-import android.view.View
 import com.jakewharton.rxbinding.support.v7.widget.RxSearchView
 import com.talhahasanzia.deezal.R
+import com.talhahasanzia.deezal.app.albums.router.AlbumsRouter
 import com.talhahasanzia.deezal.app.search.adapters.ArtistsAdapter
-import com.talhahasanzia.deezal.app.search.api.Data
+import com.talhahasanzia.deezal.app.search.api.Artist
 import com.talhahasanzia.deezal.app.search.contracts.SearchPresenter
 import com.talhahasanzia.deezal.app.search.contracts.SearchView
 import com.talhahasanzia.deezal.app.search.dependencies.DaggerSearchComponent
@@ -24,6 +23,9 @@ class SearchActivity : BaseActivity(), SearchView {
     @Inject
     lateinit var presenter: SearchPresenter
 
+    @Inject
+    lateinit var albumsRouter: AlbumsRouter
+
     private lateinit var adapter: ArtistsAdapter
 
     @LayoutRes
@@ -37,6 +39,11 @@ class SearchActivity : BaseActivity(), SearchView {
         initArtistsRecyclerView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        resetSearch()
+    }
+
     private fun initSearchView() {
         // since we don't want to request API on every change, we wait for the user to stop typing for 1 second then call API
         RxSearchView.queryTextChanges(artistSearchView)
@@ -46,7 +53,7 @@ class SearchActivity : BaseActivity(), SearchView {
 
     private fun initArtistsRecyclerView() {
         // initialize with empty data first time
-        adapter = ArtistsAdapter(ArrayList())
+        adapter = ArtistsAdapter(ArrayList(), this)
 
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
@@ -68,8 +75,8 @@ class SearchActivity : BaseActivity(), SearchView {
 
     override fun clearErrors() {
         loader.hide()
-        adapter.clearData()
         searchErrorText.hide()
+        adapter.clearData()
     }
 
     override fun showNoArtistsFound() {
@@ -78,8 +85,20 @@ class SearchActivity : BaseActivity(), SearchView {
         searchErrorText.show()
     }
 
-    override fun setArtistsData(data: List<Data>) {
+    override fun setArtistsData(data: List<Artist>) {
         clearErrors()
+        artistResultsRecyclerView.show()
         adapter.updateData(data)
+    }
+
+    override fun onArtistClicked(artist: Artist) {
+        albumsRouter.route(this, artist)
+    }
+
+    private fun resetSearch() {
+        artistSearchView.setQuery("", true)
+        artistResultsRecyclerView.hide()
+        searchErrorText.hide()
+        loader.hide()
     }
 }
