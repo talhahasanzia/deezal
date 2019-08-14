@@ -58,4 +58,20 @@ object TestUtils {
         )
     }
 
+    fun getDummyTracksResponse(): TrackListResponse {
+        return TrackListResponse(
+            arrayListOf(getDummyTrack())
+        )
+    }
+
+    fun getDummyTrack(): Track {
+        return Track(
+            "344",
+            "Somewhere I belong",
+            1,
+            1,
+            getDummyArtist()
+        )
+    }
+
 }

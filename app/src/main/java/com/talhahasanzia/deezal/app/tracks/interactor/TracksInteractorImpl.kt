@@ -27,6 +27,7 @@ class TracksInteractorImpl @Inject constructor(
 
     override fun onSuccess(response: TrackListResponse) {
         out.onTracksFound(response.data)
+        request.dispose()
     }
 
     override fun onFailure(message: String?, code: Int) {
