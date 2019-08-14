@@ -1,6 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBlack">
+
+    <android.support.v4.widget.NestedScrollView
+            android:layout_width="@dimen/unit_0dp"
+            android:layout_height="@dimen/unit_0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <View
+                    android:id="@+id/tracksTop"
+                    android:layout_width="@dimen/unit_0dp"
+                    android:layout_height="@dimen/tracks_top_height"
+                    android:background="@drawable/bg_tracks_top"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <ImageView
+                    android:id="@+id/albumLogo"
+                    android:layout_width="@dimen/unit_0dp"
+                    android:layout_height="@dimen/track_album_height"
+                    android:contentDescription="@string/album_logo"
+                    android:layout_margin="@dimen/unit_6x"
+                    android:src="@color/colorLightGrey"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tracksTop"/>
+
+            <TextView
+                    android:id="@+id/albumTitleText"
+                    android:layout_width="@dimen/unit_0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_16sp"
+                    android:textStyle="bold"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginTop="@dimen/unit_2x"
+                    android:layout_marginStart="@dimen/unit_2x"
+                    android:layout_marginEnd="@dimen/unit_2x"
+                    app:layout_constraintTop_toBottomOf="@+id/albumLogo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                    android:id="@+id/artistTitleText"
+                    android:layout_width="@dimen/unit_0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_16sp"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:textColor="@color/colorLightGrey"
+                    android:layout_marginStart="@dimen/unit_2x"
+                    android:layout_marginEnd="@dimen/unit_2x"
+                    app:layout_constraintTop_toBottomOf="@+id/albumTitleText"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                    android:id="@+id/volumeTitleText"
+                    android:layout_width="@dimen/unit_0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_16sp"
+                    android:textStyle="bold"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:textColor="@color/colorWhite"
+                    android:layout_marginStart="@dimen/unit_2x"
+                    android:layout_marginEnd="@dimen/unit_2x"
+                    app:layout_constraintTop_toBottomOf="@+id/tracksTop"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            <View
+                    android:id="@+id/tracksDivider"
+                    android:layout_width="@dimen/unit_0dp"
+                    android:layout_height="1px"
+                    android:background="@color/colorLightGrey"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/unit_2x"
+                    app:layout_constraintTop_toBottomOf="@id/volumeTitleText"/>
+
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/tracksRecyclerView"
+                    android:layout_width="@dimen/unit_0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tracksDivider"/>
+
+            <TextView
+                    android:id="@+id/noTracksError"
+                    android:layout_width="@dimen/unit_0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_tracks_found"
+                    android:textColor="@color/colorWhite"
+                    android:gravity="center"
+                    android:visibility="invisible"
+                    android:layout_marginTop="@dimen/unit_2x"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tracksDivider"/>
+
+            <ProgressBar
+                    android:id="@+id/tracksLoader"
+                    android:layout_width="@dimen/unit_4x"
+                    android:layout_height="@dimen/unit_4x"
+                    android:layout_marginTop="@dimen/unit_2x"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tracksDivider"/>
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <!--Back key at highest z-index so it is visible everytime-->
+    <ImageView
+            android:id="@+id/backImage"
+            android:layout_width="@dimen/unit_3x"
+            android:layout_height="@dimen/unit_3x"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="@string/back_key_tracks"
+            android:layout_margin="@dimen/unit_2x"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

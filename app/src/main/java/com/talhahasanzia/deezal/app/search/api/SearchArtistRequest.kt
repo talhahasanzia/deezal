@@ -12,8 +12,8 @@ class SearchArtistRequest : BaseRequest<SearchArtistResponse, String>() {
         const val QUERY = "query"
     }
 
-    override fun execute(data: HashMap<String, String>, responseCallback: ResponseCallback<SearchArtistResponse>) {
-        data[QUERY]?.let {
+    override fun execute(requestData: HashMap<String, String>, responseCallback: ResponseCallback<SearchArtistResponse>) {
+        requestData[QUERY]?.let {
             disposable.add(
                 retrofit.create(SearchAPI::class.java)
                     .getArtistBySearch(it)

@@ -13,11 +13,11 @@ package com.talhahasanzia.deezal.commons.network
  */
 interface Request<T : BaseResponseDto, R : Any> {
     /**
-     * Execute request with any data passed that is required in request. And a callback in which result of the request will be delivered.
-     * We can pass data in key value pair, but we need to specify this data type R when implementing execute().
+     * Execute request with any requestData passed that is required in request. And a callback in which result of the request will be delivered.
+     * We can pass requestData in key value pair, but we need to specify this requestData type R (as request requestData) when implementing execute().
      * Creation of request body or other json or request related object must be in specific request implementation
      */
-    fun execute(data: HashMap<String, R>, responseCallback: ResponseCallback<T>)
+    fun execute(requestData: HashMap<String, R>, responseCallback: ResponseCallback<T>)
 
     /**
      * Call dispose after receiving result either success or failure since this object created an observable

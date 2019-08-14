@@ -9,4 +9,7 @@
     <string name="no_albums_found">No Albums Found</string>
     <string name="album_logo">Album Logo</string>
     <string name="back_key_albums">Back key on Albums</string>
+    <string name="back_key_tracks">Back key tracks screen</string>
+    <string name="no_tracks_found">No tracks found</string>
+    <string name="volume_label">Volume %S</string>
 </resources>

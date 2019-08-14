@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/trackPosition"
+            android:layout_width="@dimen/unit_8x"
+            android:layout_height="@dimen/unit_0dp"
+            android:gravity="center"
+            android:textColor="@color/colorLightGrey"
+            app:layout_constraintTop_toTopOf="@id/trackTitle"
+            app:layout_constraintBottom_toBottomOf="@id/trackArtist"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+            android:id="@+id/trackTitle"
+            android:layout_width="@dimen/unit_0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_size_16sp"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:lines="1"
+            android:layout_marginEnd="@dimen/unit_2x"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/trackPosition"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+            android:id="@+id/trackArtist"
+            android:layout_width="@dimen/unit_0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorLightGrey"
+            android:textSize="@dimen/text_size_14sp"
+            android:layout_marginEnd="@dimen/unit_2x"
+            app:layout_constraintTop_toBottomOf="@id/trackTitle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/trackPosition"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
