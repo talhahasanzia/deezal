@@ -28,8 +28,11 @@ class SearchModule {
 
     @SearchScope
     @Provides
-    fun provideInteractor(request: Request<SearchArtistResponse, String>): SearchInteractor {
-        return SearchInteractorImpl(request)
+    fun provideInteractor(
+        requestData: HashMap<String, String>,
+        request: Request<SearchArtistResponse, String>
+    ): SearchInteractor {
+        return SearchInteractorImpl(requestData, request)
     }
 
     @SearchScope
@@ -38,6 +41,11 @@ class SearchModule {
         return SearchArtistRequest()
     }
 
+    @SearchScope
+    @Provides
+    fun provideRequestData(): HashMap<String, String> {
+        return HashMap()
+    }
 
 }
 

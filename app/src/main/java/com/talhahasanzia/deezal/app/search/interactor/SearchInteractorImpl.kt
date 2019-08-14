@@ -10,6 +10,7 @@ import com.talhahasanzia.deezal.commons.network.ResponseCallback
 import javax.inject.Inject
 
 class SearchInteractorImpl @Inject constructor(
+    private val requestData: HashMap<String, String>,
     private val searchArtistRequest: Request<SearchArtistResponse, String>
 ) : SearchInteractor, ResponseCallback<SearchArtistResponse> {
 
@@ -20,9 +21,8 @@ class SearchInteractorImpl @Inject constructor(
     }
 
     override fun getArtists(query: String) {
-        val data: HashMap<String, String> = HashMap()
-        data[SearchArtistRequest.QUERY] = query
-        searchArtistRequest.execute(data, this)
+        requestData[SearchArtistRequest.QUERY] = query
+        searchArtistRequest.execute(requestData, this)
     }
 
     override fun onSuccess(response: SearchArtistResponse) {

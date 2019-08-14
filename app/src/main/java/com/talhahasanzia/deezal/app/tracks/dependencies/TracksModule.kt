@@ -21,13 +21,22 @@ class TracksModule {
 
     @Provides
     @TracksScope
-    fun provideInteractor(request: Request<TrackListResponse, String>): TracksInteractor {
-        return TracksInteractorImpl(request)
+    fun provideInteractor(
+        requestData: HashMap<String, String>,
+        request: Request<TrackListResponse, String>
+    ): TracksInteractor {
+        return TracksInteractorImpl(requestData, request)
     }
 
     @Provides
     @TracksScope
     fun provideTrackListRequest(): Request<TrackListResponse, String> {
         return TrackListRequest()
+    }
+
+    @TracksScope
+    @Provides
+    fun provideRequestData(): HashMap<String, String> {
+        return HashMap()
     }
 }

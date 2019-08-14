@@ -22,8 +22,11 @@ class AlbumsModule {
 
     @Provides
     @AlbumsScope
-    fun provideAlbumsInteractor(request: Request<AlbumsResponse, String>): AlbumsInteractor {
-        return AlbumsInteractorImpl(request)
+    fun provideAlbumsInteractor(
+        requestData: HashMap<String, String>,
+        request: Request<AlbumsResponse, String>
+    ): AlbumsInteractor {
+        return AlbumsInteractorImpl(requestData, request)
     }
 
     @Provides
@@ -36,6 +39,12 @@ class AlbumsModule {
     @AlbumsScope
     fun provideTracksRouter(): TracksRouter {
         return TracksRouter()
+    }
+
+    @AlbumsScope
+    @Provides
+    fun provideRequestData(): HashMap<String, String> {
+        return HashMap()
     }
 }
 

@@ -10,6 +10,7 @@ import com.talhahasanzia.deezal.commons.network.ResponseCallback
 import javax.inject.Inject
 
 class AlbumsInteractorImpl @Inject constructor(
+    private val requestData: HashMap<String, String>,
     private val request: Request<AlbumsResponse, String>
 ) : AlbumsInteractor, ResponseCallback<AlbumsResponse> {
 
@@ -20,9 +21,8 @@ class AlbumsInteractorImpl @Inject constructor(
     }
 
     override fun fetchAlbumsByArtistId(id: String) {
-        val data = HashMap<String, String>()
-        data[AlbumsRequest.ID] = id
-        request.execute(data, this)
+        requestData[AlbumsRequest.ID] = id
+        request.execute(requestData, this)
     }
 
     override fun onSuccess(response: AlbumsResponse) {
