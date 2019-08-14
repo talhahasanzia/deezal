@@ -10,6 +10,7 @@ import com.talhahasanzia.deezal.commons.network.ResponseCallback
 import javax.inject.Inject
 
 class TracksInteractorImpl @Inject constructor(
+    private val requestData: HashMap<String, String>,
     private val request: Request<TrackListResponse, String>
 ) : TracksInteractor, ResponseCallback<TrackListResponse> {
 
@@ -20,13 +21,13 @@ class TracksInteractorImpl @Inject constructor(
     }
 
     override fun fetchTrackList(trackListId: String) {
-        val requestData = HashMap<String, String>()
-        requestData.put(TrackListRequest.TRACK_ID, trackListId)
+        requestData[TrackListRequest.TRACK_ID] = trackListId
         request.execute(requestData, this)
     }
 
     override fun onSuccess(response: TrackListResponse) {
         out.onTracksFound(response.data)
+        request.dispose()
     }
 
     override fun onFailure(message: String?, code: Int) {
