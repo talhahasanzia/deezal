@@ -104,4 +104,9 @@ class TracksActivity : BaseActivity(), TracksView {
         tracksLoader.hide()
         noTracksError.show()
     }
+
+    override fun showError(message: String) {
+        super.showError(message)
+        showNoTracksFound()
+    }
 }

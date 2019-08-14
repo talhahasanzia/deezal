@@ -95,6 +95,11 @@ class SearchActivity : BaseActivity(), SearchView {
         albumsRouter.route(this, artist)
     }
 
+    override fun showError(message: String) {
+        super.showError(message)
+        showNoArtistsFound()
+    }
+
     private fun resetSearch() {
         artistSearchView.setQuery("", true)
         artistResultsRecyclerView.hide()

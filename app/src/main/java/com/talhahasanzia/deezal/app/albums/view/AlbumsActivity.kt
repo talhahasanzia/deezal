@@ -95,8 +95,8 @@ class AlbumsActivity : BaseActivity(), AlbumsView {
 
     override fun showNoAlbumsFound() {
         albumsLoader.hide()
-        noAlbumsText.show()
         albumsRecyclerView.hide()
+        noAlbumsText.show()
     }
 
     override fun onAlbumClicked(album: Album) {
@@ -104,5 +104,10 @@ class AlbumsActivity : BaseActivity(), AlbumsView {
             val trackData = TracksRouter.TracksData(it.name, album)
             tracksRouter.route(this, trackData)
         }
+    }
+
+    override fun showError(message: String) {
+        super.showError(message)
+        showNoAlbumsFound()
     }
 }
