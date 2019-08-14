@@ -1,6 +1,5 @@
 package com.talhahasanzia.deezal.app.search.interactor
 
-import com.talhahasanzia.deezal.app.search.api.Artist
 import com.talhahasanzia.deezal.app.search.api.SearchArtistResponse
 import com.talhahasanzia.deezal.app.search.contracts.SearchInteractorOut
 import com.talhahasanzia.deezal.app.util.TestUtils
@@ -52,6 +51,7 @@ class SearchInteractorImplTest {
         searchInteractorImpl.onSuccess(response)
 
         Mockito.verify(out).onArtistsFound(response.data)
+        Mockito.verify(searchArtistRequest).dispose()
     }
 
     @Test
@@ -60,5 +60,6 @@ class SearchInteractorImplTest {
         searchInteractorImpl.onFailure(message, -1)
 
         Mockito.verify(out).onArtistFailure(message!!)
+        Mockito.verify(searchArtistRequest).dispose()
     }
 }
